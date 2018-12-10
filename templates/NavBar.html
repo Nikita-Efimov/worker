@@ -1,0 +1,45 @@
+{% extends "base_template.html" %}
+{% block nav_block %}
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a href="/"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/75686-84.png" class="navbar-brand" href="#" style="height: 50px; width: 45px; cursor: pointer;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  {{ user.name }}
+		  </a>
+		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="dropdown-item" href="/profile">Профиль</a>
+			<a class="dropdown-item" href="/statistics">Статистика</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="/logout">Выход</a>
+		  </div>
+		</li>
+		<li class="nav-item dropdown">
+		  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Задания
+		  </a>
+		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="dropdown-item" href="/create_task">Разместить задание</a>
+			<a class="dropdown-item" href="/task_list">Список заданий</a>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="/current_list">Текущие заданий</a>
+		  </div>
+		</li>
+      <li class="nav-item">
+        <a class="nav-link" href="/requests">Запросы</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search">
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+  </div>
+</nav>
+{% block main_block %} {% endblock %}
+{% endblock %}

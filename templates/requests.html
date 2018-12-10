@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+{% block main_content %}
+
+<style media="screen">
+.table-header{background-color:#95A5A6;font-size:14px;text-transform:uppercase;letter-spacing:.03em}
+.table-row{background-color:#fff;box-shadow:0 0 9px 0 rgba(0,0,0,.1);border-radius:3px;padding:25px 30px;display:flex;justify-content:space-between;margin-bottom:25px}
+.col-1{flex-basis:10%}
+.col-2{flex-basis:40%}
+.col-3,.col-4{flex-basis:25%}
+@media all and (max-width:767px){
+.table-header{display:none}
+li{display:block}
+.col{flex-basis:100%;display:flex;padding:10px 0}
+.col:before{color:#6C7A89;padding-right:10px;content:attr(data-label);flex-basis:50%;text-align:right}
+.container{position:relative; top:-40px; font-family:lato,sans-serif;max-width:1000px;margin-left:auto;margin-right:auto;padding-left:10px;padding-right:10px}}
+</style>
+
+<style media="screen">
+		.name {
+			text-decoration: underline;
+			cursor: pointer;
+		}
+
+		.proj-name {
+
+		}
+</style>
+
+    <div class="container">
+      <h2 style="font-size:26px;margin:20px 20px;text-align:center">Запросы на выполнение</h2>
+      <ul class="responsive-table">
+      	{% for requester in users %}
+      	{% if requester != None %}
+		  <form method="POST" action="/acept_denied">
+        	<li class="table-row">
+	          <div class="col col-1 name" >{{ requester.user_name }}</div>
+			  <div class="col col-6 proj-name">{{ requester.task_name }}</div>
+	          <button name="acept" type="button" class="btn btn-success col col-2">Принять</button>
+			  <button name="denied" type="button" class="btn btn-danger col col-2">Отклонить</button>
+        	</li>
+		</form>
+		{% endif %}
+		{% endfor %}
+      </ul>
+    </div>
+
+{% endblock %}

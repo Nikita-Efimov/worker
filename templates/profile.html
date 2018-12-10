@@ -1,0 +1,99 @@
+{% extends "index.html" %}
+{% block main_content %}
+
+<div style="position: relative; top: -75px;">
+	<div class="container bootstrap snippet">
+	    <div class="row">
+	  		<div class="col-sm-10 text-uppercase"><h1> {{ user.name }} </h1></div>
+	    </div>
+	    <div class="row">
+	  		<div class="col-sm-3"><!--left col-->
+
+
+	      <div class="text-center">
+	        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+	        <input type="file" class="text-center center-block file-upload" style="margin-top: 10px; margin-bottom: 0px">
+	      </div><hr><br>
+
+	          <ul class="list-group">
+	            <li class="list-group-item text-muted">Активность <i class="fa fa-dashboard fa-1x"></i></li>
+	            <li class="list-group-item text-right"><span class="pull-left"><strong>Заданий взято</strong></span> 125</li>
+	            <li class="list-group-item text-right"><span class="pull-left"><strong>Заданий выполнено</strong></span> 13</li>
+	            <li class="list-group-item text-right"><span class="pull-left"><strong>Заданий созданно</strong></span> 37</li>
+	          </ul>
+
+	        </div><!--/col-3-->
+	    	<div class="col-sm-9">
+	          <div class="tab-content">
+	            <div class="tab-pane active" id="home">
+	                <hr>
+	                  <form class="form" action="##" method="post" id="registrationForm">
+	                      <div class="form-group">
+
+	                          <div class="col-xs-6">
+	                              <label for="first_name"><h4>Имя</h4></label>
+	                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Имя" title="Введите имя">
+	                          </div>
+	                      </div>
+	                      <div class="form-group">
+
+	                          <div class="col-xs-6">
+	                            <label for="last_name"><h4>Фамилия</h4></label>
+	                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Фамилия" title="Введите фамилию">
+	                          </div>
+	                      </div>
+
+	                      <div class="form-group">
+	                          <div class="col-xs-6">
+	                             <label for="mobile"><h4>Телефон</h4></label>
+	                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Телефон" title="Введите ваш номер телефона">
+	                          </div>
+	                      </div>
+
+						  <div class="form-group">
+
+	                          <div class="col-xs-6">
+	                              <label for="ability"><h4>Специальности</h4></label>
+	                              <input type="text" class="form-control" name="ability" id="ability" placeholder="Водопроводчик...">
+	                          </div>
+	                      </div>
+
+	                      <div class="form-group">
+
+	                          <div class="col-xs-6">
+	                              <label for="email"><h4>Почта</h4></label>
+	                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="Введите почту">
+	                          </div>
+	                      </div>
+
+	                      <div class="form-group">
+	                          <div class="col-xs-6">
+	                              <label for="password"><h4>Пароль</h4></label>
+	                              <input type="password" class="form-control" name="password" id="password" placeholder="***********" title="Введите пароль">
+	                          </div>
+	                      </div>
+	                      <div class="form-group">
+
+	                          <div class="col-xs-6">
+	                            <label for="password2"><h4>О себе</h4></label>
+	                              <textarea rows="8" cols="80" type="text" class="form-control" name="info" id="info" placeholder="Я самый лучший специалист в области..." title="Введите о себе"></textarea>
+	                          </div>
+	                      </div>
+	                      <div class="form-group">
+	                           <div class="col-xs-12">
+	                                <br>
+	                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Сохранить</button>
+	                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Сбросить</button>
+	                            </div>
+	                      </div>
+	              	</form>
+
+	              <hr>
+
+	              </div><!--/tab-pane-->
+	          </div><!--/tab-content-->
+
+	        </div><!--/col-9-->
+	    </div><!--/row-->
+</div>
+{% endblock %}

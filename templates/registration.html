@@ -1,0 +1,118 @@
+{% extends "base_template.html" %}
+{% block registr %}
+	<style media="screen">
+
+
+ul.card-toolbar {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+    ul.card-toolbar > li {
+        float: left;
+        display: list-item;
+        list-style: none;
+        margin: 0px;
+        /*margin: 0 5px 10px 0;*/
+    }
+
+.btn-default {
+    background-image: -webkit-linear-gradient(top,#fff 0,#e0e0e0 100%);
+    background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe0e0e0', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    background-repeat: repeat-x;
+    border-color: #dbdbdb;
+    text-shadow: 0 1px 0 #fff;
+    border-color: #ccc;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075);
+}
+
+.thin-card-header {
+    padding: 0.5rem 1.25rem;
+}
+
+.card {
+    border-radius: 0.5rem;
+}
+
+
+	</style>
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!------ Include the above in your HEAD tag ---------->
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<div class="container">
+		<div class="row">
+		    <div class="col-lg-12">
+
+			<div class="card bg-default mb-3">
+	    <div class="card-header thin-card-header">
+	        <div class="card-title">
+	            <ul class="card-toolbar">
+	                <li class="float-left">
+	                    <h4 style="font-family:Poppins, sans-serif"><a href="/"><img src="https://d30y9cdsu7xlg0.cloudfront.net/png/75686-84.png" class="navbar-brand" style="height: 50px; width: 45px; cursor: pointer; position: relative; top: -2px;"></a> Регистрация</h4>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="card-body">
+	        <form method="POST" action="/registration" class="form-horizontal" role="form">
+	            <div class="row">
+	                <div class="col-lg-6">
+	                    <!-- Text input-->
+						<div class="form-group">
+	                        <label class="control-label">Email</label>
+	                        <input name="email" type="text" class="form-control" placeholder="abc@gmail.com" />
+	                    </div>
+						<div class="form-group">
+	                        <label class="control-label" for="textinput">Пароль</label>
+	                        <input name="pwd" type="password" placeholder="Пароль" class="form-control">
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="control-label">Специальности</label>
+	                        <input name="abilities" type="text" class="form-control" placeholder="Комонавт..." />
+	                    </div>
+	                    <!-- Text input-->
+	                    <div class="row">
+	                        <div class="col-lg-6">
+	                            <div class="form-group">
+	                                <label class="control-label" for="textinput">Имя</label>
+	                                <input name="name" type="text" placeholder="Имя" class="form-control">
+	                            </div>
+	                        </div>
+	                        <div class="col-lg-6">
+	                            <div class="form-group">
+	                                <label class="control-label" for="textinput">Фамилия</label>
+	                                <input name="surname" type="text" placeholder="Фамилия" class="form-control">
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-lg-6">
+	                    <div class="form-group">
+	                        <label class="control-label">О себе</label>
+	                        <textarea name="bio" rows="12" class="form-control"></textarea>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="form-group">
+	                <div class="text-center">
+	                    <button value="register" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Зарегестрироваться</button>
+						<button value="reset" type="submit" class="btn btn-default"><i class="fa fa-remove"></i> Сбросить</button>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+		</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+{% block main_content %}
+
+{% for task in tasks %}
+<div class="card mb-4 box-shadow">
+	<div class="card-header">
+		<h4 class="my-0 font-weight-normal">{{ task.name }}</h4>
+	</div>
+	<div class="card-body">
+		<h1 class="card-title pricing-card-title"> {{ task.cost }} <small class="text-muted">(NEO)</small></h1>
+        <ul class="list-unstyled mt-3 mb-4" style="width: 250px;">
+			<li>{{ task.description }}</li>
+		</ul>
+		<div id="chart_div" style="position: relative; top: -130px; left: 150px;"></div>
+		<button type="button" class="btn btn-lg btn-block btn-outline-primary">Перейти</button>
+	</div>
+</div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {packages:["orgchart"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Name');
+        data.addColumn('string', 'Manager');
+        data.addColumn('string', 'ToolTip');
+
+        // name / how to show / base class / tooltip
+        data.addRows([
+        	{% for wey in dewey %}
+          [{v:'{{ wey.name }}', f:'{{ wey.name }}<div style="color:red; font-style:italic"></div>'},
+          '{{ wey.prevname }}', ''],
+		  {% endfor %}
+        ]);
+
+        // Create the chart.
+        var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+        // Draw the chart, setting the allowHtml option to true for the tooltips.
+        chart.draw(data, {allowHtml:true});
+      }
+   </script>
+
+	<script type="text/javascript">
+		window.onload = () => { setTimeout( () =>
+		{
+			var p = document.getElementsByTagName('td')
+			for (i = 0; i < p.length; i++)
+			{
+				e = getComputedStyle(p[i])
+				if (e.borderTopWidth == '2px')
+					p[i].style.borderTopWidth = '0px';
+				if (e.borderBottomWidth == '2px')
+					p[i].style.borderBottomWidth = '0px';
+				if (e.borderLeftWidth == '2px')
+					p[i].style.borderLeftWidth = '0px';
+				if (e.borderRightWidth == '2px')
+					p[i].style.borderRightWidth = '0px';
+			}
+		}, 10); }
+	</script>
+{% endfor %}
+{% endblock %}

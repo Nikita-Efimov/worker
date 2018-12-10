@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block main_content %}
+	<h2> {{ task.name }} </h2>
+	<h5><i>{{ task.owner }}</i></h5>
+	{{ task.description.replace("&lt;", "<").replace("&gt;", ">")|safe }}
+	<form method="GET" action="/request/{{ task.id }}">
+		<input type="submit" class="btn btn-success" value="Запросить">
+	</form>
+{% endblock %}
