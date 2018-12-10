@@ -11,6 +11,11 @@ app = Flask(__name__)
 app.secret_key = '123'
 
 
+def check_login():
+    if not ('logined' in session) or session['logined'] == False:
+        return redirect('/')
+    return None
+
 @app.route('/')
 def home():
     if not ('logined' in session) or session['logined'] == False:
@@ -35,6 +40,9 @@ def home():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def not_found(path):
+    ans = check_login()
+    if ans:
+        return ans
     return render_template('404.html',
                            page_title="Ошибка 404",
                            user={"name": session['user_name']})
@@ -42,6 +50,9 @@ def not_found(path):
 
 @app.route('/create_task', methods=["GET", "POST"])
 def create_task():
+    ans = check_login()
+    if ans:
+        return ans
     if flask.request.method == 'GET':
         if not ('user_name' in session):
             session['user_name'] = 'admin'
@@ -69,6 +80,9 @@ def create_task():
 
 @app.route('/task_list')
 def task_list():
+    ans = check_login()
+    if ans:
+        return ans
     return render_template('task_list.html',
                            page_title="Список заданий",
                            user={"name": session['user_name']},
@@ -78,6 +92,9 @@ def task_list():
 
 @app.route('/current_list')
 def current_list():
+    ans = check_login()
+    if ans:
+        return ans
     return render_template('current_list.html',
                            page_title="Текущие задания",
                            user={"name": session['user_name']},
@@ -87,6 +104,9 @@ def current_list():
 
 @app.route('/profile')
 def profile():
+    ans = check_login()
+    if ans:
+        return ans
     return render_template('profile.html',
                            page_title="Профиль",
                            user={"name": session['user_name']})
@@ -94,6 +114,9 @@ def profile():
 
 @app.route('/statistics')
 def statistics():
+    ans = check_login()
+    if ans:
+        return ans
     try:
         user = user_get(session['email'])
     except:
@@ -109,6 +132,9 @@ def statistics():
 
 @app.route('/requests')
 def events():
+    ans = check_login()
+    if ans:
+        return ans
     return render_template('requests.html',
                            page_title="Запросы",
                            user={"name": session['user_name']},
@@ -117,6 +143,9 @@ def events():
 
 @app.route('/task/<task_id>')
 def task(task_id):
+    ans = check_login()
+    if ans:
+        return ans
     task_id = int(task_id)
     return render_template('task.html',
                            page_title="Задание #" + str(task_id),
@@ -126,6 +155,9 @@ def task(task_id):
 
 @app.route('/registration', methods=["POST", "GET"])
 def registration():
+    ans = check_login()
+    if ans:
+        return ans
     if flask.request.method == "POST":
         email = flask.request.form['email']
         password = flask.request.form['pwd']
@@ -143,6 +175,9 @@ def registration():
 
 @app.route('/login', methods=["POST"])
 def login():
+    ans = check_login()
+    if ans:
+        return ans
     if flask.request.form['submit'] == 'sign_up':
         return redirect("/registration")
     elif flask.request.form['submit'] == 'sign_up':
@@ -162,6 +197,9 @@ def login():
 
 @app.route('/request/<task_id>')
 def request(task_id):
+    ans = check_login()
+    if ans:
+        return ans
     try:
         db = mysql.connector.connect(
             host="localhost",
