@@ -1,8 +1,5 @@
 from news import get_task, get_request
-try:
-    import mysql.connector
-except:
-    pass
+import mysql.connector
 
 
 def check_user(email):

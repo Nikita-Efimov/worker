@@ -2,10 +2,7 @@ from flask import Flask, render_template, session, redirect
 import flask
 from news import save_news, get_news, get_len, get_task, add_new, generate_dewey, user_get, user_get_tasks
 from user import register_user, user_validate, get_tasks, user_get_commits, get_requests
-try:
-    import mysql.connector
-except:
-    pass
+import mysql.connector
 
 app = Flask(__name__)
 app.secret_key = '123'
@@ -16,6 +13,7 @@ def check_login():
         return redirect('/')
     return None
 
+
 @app.route('/')
 def home():
     if not ('logined' in session) or session['logined'] == False:
@@ -23,13 +21,7 @@ def home():
                                page_title="Авторизация")
     if not ('user_name' in session):
         session['user_name'] = 'admin'
-    try:
-        user = user_get(session['email'])
-    except:
-        user = {"name": "admin",
-                "abilities": "JavaScript, PHP, Java, Python, Ruby, Java, Node.js, etc.",
-                "finished_tasks": 13,
-                "created_tasks": 37}
+    user = user_get(session['email'])
     return render_template('index.html',
                            page_title="Лента",
                            user=user,
@@ -56,13 +48,7 @@ def create_task():
     if flask.request.method == 'GET':
         if not ('user_name' in session):
             session['user_name'] = 'admin'
-        try:
-            user = user_get(session['email'])
-        except:
-            user = {"name": "admin",
-                    "abilities": "JavaScript, PHP, Java, Python, Ruby, Java, Node.js, etc.",
-                    "finished_tasks": 13,
-                    "created_tasks": 37}
+        user = user_get(session['email'])
         return render_template('create_task.html',
                                page_title="Создать задание",
                                user=user,
@@ -117,14 +103,7 @@ def statistics():
     ans = check_login()
     if ans:
         return ans
-    try:
-        user = user_get(session['email'])
-    except:
-        user = {"name": "admin",
-                "abilities": "JavaScript, PHP, Java, Python, Ruby, Java, Node.js, etc.",
-                "finished_tasks": 13,
-                "created_tasks": 37,
-                "taked_tasks": 37}
+    user = user_get(session['email'])
     return render_template('statistics.html',
                            page_title="Статистика",
                            user=user)
@@ -184,14 +163,9 @@ def login():
         return redirect("/123")
     email = flask.request.form['login']
     password = flask.request.form['pwd']
-    try:
-        if user_validate(email, password):
-            session['logined'] = True
-            session['email'] = email
-    except:
-        if email == "admin@admin.admin" and password == "1234":
-            session['logined'] = True
-            session['email'] = email
+    if user_validate(email, password):
+        session['logined'] = True
+        session['email'] = email
     return redirect('/')
 
 
@@ -200,27 +174,24 @@ def request(task_id):
     ans = check_login()
     if ans:
         return ans
-    try:
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="rootUser@1234",
-            database="worker"
-        )
-        cursor = db.cursor()
-        cursor.execute("SELECT requests FROM task WHERE id = " + str(task_id))
-        result = cursor.fetchone()[0]
-        if result is None or result == '':
-            result = ''
-        else:
-            result = str(result) + ','
-        cursor.execute("UPDATE task SET requests='" +
-                       result +
-                       str(user_get(session['email'])['id']) +
-                       "' WHERE id = " + str(task_id))
-        db.commit()
-    except:
-        pass
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="rootUser@1234",
+        database="worker"
+    )
+    cursor = db.cursor()
+    cursor.execute("SELECT requests FROM task WHERE id = " + str(task_id))
+    result = cursor.fetchone()[0]
+    if result is None or result == '':
+        result = ''
+    else:
+        result = str(result) + ','
+    cursor.execute("UPDATE task SET requests='" +
+                   result +
+                   str(user_get(session['email'])['id']) +
+                   "' WHERE id = " + str(task_id))
+    db.commit()
     return redirect('/task_list')
 
 

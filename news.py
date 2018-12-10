@@ -1,8 +1,5 @@
 # coding: utf-8
-try:
-    import mysql.connector
-except:
-	print("Mysql error")
+import mysql.connector
 
 DATA_FILE = 'news.data'
 DATA_ENCODING = 'utf-8'
@@ -87,33 +84,26 @@ def user_get_tasks(email):
 
 
 def load_news_():
-    try:
-        db = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="worker"
-        )
-        cursor = db.cursor()
-        ret = []
-        cursor.execute('SELECT id FROM task')
-        result = cursor.fetchall()
-        for x in result:
-            x = str(x)[1:len(str(x)) - 2]
-            cursor.execute('SELECT name, desciption, const FROM task WHERE id=' + x)
-            get = cursor.fetchone()
-            ret.append({"name": get[0],
-                        "description": get[1],
-                        "cost": get[2],
-                        "id": x})
-        ret.reverse()
-        return ret
-    except:
-        try:
-            with open(DATA_FILE, 'r', encoding=DATA_ENCODING) as data_file:
-                return eval(data_file.read())
-        except BaseException:
-            return []
+    db = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="rootUser@1234",
+        database="worker"
+    )
+    cursor = db.cursor()
+    ret = []
+    cursor.execute('SELECT id FROM task')
+    result = cursor.fetchall()
+    for x in result:
+        x = str(x)[1:len(str(x)) - 2]
+        cursor.execute('SELECT name, desciption, const FROM task WHERE id=' + x)
+        get = cursor.fetchone()
+        ret.append({"name": get[0],
+                    "description": get[1],
+                    "cost": get[2],
+                    "id": x})
+    ret.reverse()
+    return ret
 
 
 def save_news():
